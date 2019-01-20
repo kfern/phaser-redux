@@ -113,9 +113,9 @@ export default class GameScene extends Phaser.Scene {
     // Update the score
     this.store.dispatch(gameSlice.actions.incrementScore('star'));
     if (this.stars.countActive(true) === 0) {
-      //  A new batch of stars to collect
+      //  A new batch of stars to collect      
       this.stars.children.iterate(child => {
-        child.enabeBody(true, child.x, 0, true, true);
+        child.enableBody(true, child.x, 0, true, true);
       });
       // Create a new bomb
       addBomb(this.bombs, this.player);
