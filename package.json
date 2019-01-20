@@ -1,7 +1,7 @@
 {
-  "name": "phaser3-project-template",
-  "version": "1.0.9",
-  "description": "A Phaser 3 Project Template",
+  "name": "phaser-redux",
+  "version": "1.0.0",
+  "description": "A Phaser game with Redux",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/photonstorm/phaser3-project-template.git"
+    "url": "git+https://github.com/kfern/phaser-redux.git"
   },
-  "author": "Richard Davey <rdavey@gmail.com> (http://www.photonstorm.com)",
+  "author": "Fernando Navarro (http://www.github.com/kfern)",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "bugs": {
-    "url": "https://github.com/photonstorm/phaser3-project-template/issues"
+    "url": "https://github.com/kfern/phaser-redux/issues"
   },
-  "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
+  "homepage": "https://github.com/kfern/phaser-redux#readme",
   "devDependencies": {
     "webpack-dev-server": "^2.11.0",
     "webpack": "^3.4.1",
