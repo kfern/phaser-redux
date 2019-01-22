@@ -24,6 +24,8 @@ El idioma oficial de la documentación y gestión del repositorio es el Español
 Por otra parte, el idioma para los comentarios en el código fuente es el inglés. Si envías un PR y no tienes nivel suficiente puedes usar Google Translate.
 # Posibles mejoras
 Lista de mejoras que se podrían implementar. Quien esté intesado en colaborar puede enviar un PR o abrir un Issue.
+* Poder jugar con pantalla táctil y ratón.
+* Adaptar el tamaño del juego al de la pantalla.
 * Refactorizar estrellas y bombas para que sean clases independientes.
 * Añadir en el estado todo lo necesario para poder ver con devTools la pantalla completa en cada instante. Ahora sólo se gestionan la puntuación y la animación que se aplica al player.
 
