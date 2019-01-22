@@ -1,5 +1,7 @@
 # phaser-redux
 
+[![HitCount](http://hits.dwyl.io/kfern/phaser-redux.svg)](http://hits.dwyl.io/kfern/phaser-redux)
+
 Este proyecto es un ejemplo de cómo usar redux para desarrollar juegos con Phaser 3, además de pretender ser una herramienta en Español para quienes estén interesados en aprender a programar juegos.
 
 Combinar Phaser y Redux permite que el desarrollo de un juego sea más módular, fácil de depurar mediante Redux devTools y abre la posibilidad de automatizar los tests de la lógica del juego. 
