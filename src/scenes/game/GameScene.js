@@ -88,6 +88,8 @@ export default class GameScene extends Phaser.Scene {
       this.lastMoveTo = keyPress
       this.store.dispatch(gameSlice.actions.moveTo(keyPress));
     }
+    // Save info into state
+    saveInfo(this);
   }
 
   gameOver(newVal, oldVal, objectPath) {
@@ -126,6 +128,16 @@ export default class GameScene extends Phaser.Scene {
     // GAME OVER
     this.store.dispatch(gameSlice.actions.setGameOver(true));    
   }
+};
+
+const saveInfo = (that) => {
+  const info = {
+    player: {
+      x: that.player.body.position.x,
+      y: that.player.body.position.y,
+    }
+  };
+  that.store.dispatch(gameSlice.actions.setInfo(info));
 };
 
 const createPlayer = (that) => {
