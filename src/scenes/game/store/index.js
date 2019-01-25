@@ -10,11 +10,11 @@ const gameLogic = combineReducers({
 const store = createStore(gameLogic, /* preloadedState, */ devToolsEnhancer(
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
   {
-    actionsBlacklist: ['gameSlice/setInfo'] // hide this actions in redux devTools
+    actionsBlacklist: [ 'gameSlice/setInfo' ] // hide this actions in redux devTools
   }
 ));
 
 module.exports = {
   store,
   gameSlice
-}
+};

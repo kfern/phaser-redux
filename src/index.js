@@ -8,7 +8,7 @@ class Game extends Phaser.Game {
     super(config);
     this.scene.add('Boot', BootScene);
     this.scene.add('Game', GameScene);
-    this.scene.start('Boot');    
+    this.scene.start('Boot');
   }
 }
  

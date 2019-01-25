@@ -14,9 +14,9 @@ const gameSlice = createSlice({
       animation: 'turn'
     },
     moveTo: {
-      'left': false,
-      'right': false,
-      'up': false
+      left: false,
+      right: false,
+      up: false
     },
     info: {
       player: {
@@ -49,15 +49,14 @@ const gameSlice = createSlice({
 
     incrementScore: (state, action) => {
       const scoreData = {
-        'star': 10
+        star: 10
       };
       state.score = state.score + scoreData[action.payload]; // mutate the state all you want with immer
     },
 
     setInfo: (state, action) => {
       state.info = action.payload; // mutate the state all you want with immer
-    },
-
+    }
   }
 });
 

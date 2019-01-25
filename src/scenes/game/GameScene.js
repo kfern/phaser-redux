@@ -1,5 +1,5 @@
 import 'phaser';
-import isEqual from 'is-equal'
+import isEqual from 'is-equal';
 import { watchStore } from '../../utils/watchStore';
 import { store, gameSlice } from './store';
 
@@ -19,11 +19,12 @@ export default class GameScene extends Phaser.Scene {
     this.gameOver = this.gameOver.bind(this);
     this.handleMovePlayer = this.handleMovePlayer.bind(this);
     this.renderScoreValue = this.renderScoreValue.bind(this);
+
     // Used in update() to limit dispatch calls
     this.lastMoveTo = null;
   }
 
-  init(data) { }
+  init() { }
 
   preload() {
     // Images
@@ -43,75 +44,95 @@ export default class GameScene extends Phaser.Scene {
     watchStore(store, storeMonitor);
   }
 
-  create(data) {
+  create() {
     // A simple background for our game
     this.add.image(400, 300, 'sky');
+
     // The platforms contains the ground and the ledges we can jump on
     this.platforms = createPlatforms(this);
+
     // The player and its settings
     this.player = createPlayer(this);
+
     // Player animations
     createAnimations(this);
+
     // Input Events
     this.keyPress = this.input.keyboard.createCursorKeys();
+
     //  Some stars to collect
     this.stars = createStars(this);
+
     // The enemy
     this.bombs = this.physics.add.group();
+
     // Add one bomb 
     addBomb(this.bombs, this.player);
+
     //  The score
     this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    
     //  Collide the player, stars and bombs with the platforms
     this.physics.add.collider(this.player, this.platforms);
     this.physics.add.collider(this.stars, this.platforms);
     this.physics.add.collider(this.bombs, this.platforms);
+
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
+
     //  Checks to see if the player collides with any ot the bombs.
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
   }
 
+  // eslint-disable-next-line no-unused-vars
   update(time, delta) {
     // Return if gameOver
-    if (this.store.getState().gameSlice.gameOver){
+    if (this.store.getState().gameSlice.gameOver) {
       return;
     }
+
     // Input
     const keyPress = {
-      'left': this.keyPress.left.isDown,
-      'right': this.keyPress.right.isDown,
-      'up': this.keyPress.up.isDown,
-    }
+      left: this.keyPress.left.isDown,
+      right: this.keyPress.right.isDown,
+      up: this.keyPress.up.isDown
+    };
+
     // Launch moveTo action in game. This action sets velocity
-    if (!isEqual(keyPress, this.lastMoveTo)){
-      this.lastMoveTo = keyPress
+    if (!isEqual(keyPress, this.lastMoveTo)) {
+      this.lastMoveTo = keyPress;
       this.store.dispatch(gameSlice.actions.moveTo(keyPress));
     }
+
     // Save info into state
     saveInfo(this);
   }
 
+  // eslint-disable-next-line no-unused-vars
   gameOver(newVal, oldVal, objectPath) {
-    if (newVal){
+    if (newVal) {
       this.physics.pause();
       this.player.setTint(0xff0000);
-      this.player.anims.play('turn');  
+      this.player.anims.play('turn');
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   handleMovePlayer(newVal, oldVal, objectPath) {
     this.player.setVelocityX(newVal.x);
     this.player.setVelocityY(newVal.y);
     this.player.anims.play(newVal.animation, true);
   }
 
+  // eslint-disable-next-line no-unused-vars
   renderScoreValue(newVal, oldVal, objectPath) {
     this.scoreText.setText('Score: ' + newVal);
   }
 
+  // eslint-disable-next-line no-unused-vars
   collectStar(player, star) {
     star.disableBody(true, true);
+    
     // Update the score
     this.store.dispatch(gameSlice.actions.incrementScore('star'));
     if (this.stars.countActive(true) === 0) {
@@ -119,22 +140,24 @@ export default class GameScene extends Phaser.Scene {
       this.stars.children.iterate(child => {
         child.enableBody(true, child.x, 0, true, true);
       });
+
       // Create a new bomb
       addBomb(this.bombs, this.player);
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   hitBomb(player, bomb) {
     // GAME OVER
-    this.store.dispatch(gameSlice.actions.setGameOver(true));    
+    this.store.dispatch(gameSlice.actions.setGameOver(true));
   }
-};
+}
 
 const saveInfo = (that) => {
   const info = {
     player: {
       x: that.player.body.position.x,
-      y: that.player.body.position.y,
+      y: that.player.body.position.y
     }
   };
   that.store.dispatch(gameSlice.actions.setInfo(info));
@@ -165,7 +188,7 @@ const createPlatforms = (that) => {
   platforms.create(750, 220, 'ground');
 
   return platforms;
-}
+};
 
 const createAnimations = (that) => {
   //  Our player animations, turning, walking left and walking right.
@@ -178,7 +201,7 @@ const createAnimations = (that) => {
 
   that.anims.create({
     key: 'turn',
-    frames: [{ key: 'dude', frame: 4 }],
+    frames: [ { key: 'dude', frame: 4 } ],
     frameRate: 20
   });
 
@@ -188,7 +211,7 @@ const createAnimations = (that) => {
     frameRate: 10,
     repeat: -1
   });
-}
+};
 
 const createStars = (that) => {
   //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
@@ -213,4 +236,4 @@ const addBomb = (bombs, player) => {
   bomb.setCollideWorldBounds(true);
   bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
   bomb.allowGravity = false;
-}
+};
