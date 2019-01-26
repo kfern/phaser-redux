@@ -242,11 +242,14 @@ const createAnimations = (that) => {
 };
 
 const createStars = (that) => {
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
+  const configStars = 12;
+  const configStepX = parseInt(that.game.config.width / (configStars + 1));
+
+  //  Some stars to collect
   const stars = that.physics.add.group({
     key: 'star',
-    repeat: 11,
-    setXY: { x: 12, y: 0, stepX: 70 }
+    repeat: configStars - 1 ,
+    setXY: { x: configStars / 2, y: 0, stepX: configStepX }
   });
   stars.children.iterate(function (child) {
     //  Give each star a slightly different bounce
