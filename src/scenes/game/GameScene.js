@@ -164,10 +164,9 @@ const getNextMoveTo = (that) => {
     const difY = Math.abs(that.pointer.y - that.player.body.position.y);
     if (difY > difX) {
       next.up = that.pointer.y < that.player.body.position.y;
-    } else if (that.pointer.x > that.player.body.position.x) {
-      next.right = true;
     } else {
-      next.left = true;
+      next.right = that.pointer.x > that.player.body.position.x;
+      next.left = that.pointer.x < that.player.body.position.x;
     }
   } else {
     // Keyboard
