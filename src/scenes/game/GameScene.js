@@ -156,8 +156,8 @@ export default class GameScene extends Phaser.Scene {
 const saveInfo = (that) => {
   const info = {
     player: {
-      x: that.player.body.position.x,
-      y: that.player.body.position.y
+      x: parseInt(that.player.body.position.x),
+      y: parseInt(that.player.body.position.y)
     }
   };
   that.store.dispatch(gameSlice.actions.setInfo(info));
