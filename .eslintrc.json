@@ -59,10 +59,6 @@
       "error",
       "never"
     ],
-    "array-bracket-spacing": [
-      "error",
-      "always"
-    ],
     "block-spacing": [
       "error",
       "always"
