@@ -8,6 +8,7 @@ export default class GameScene extends Phaser.Scene {
     super({ key: 'Game' });
 
     this.keyPress = null;
+    this.pointer = null;
     this.player = null;
     this.platforms = null;
     this.stars = null;
@@ -59,6 +60,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Input Events
     this.keyPress = this.input.keyboard.createCursorKeys();
+    this.pointer = this.input.activePointer;
 
     //  Some stars to collect
     this.stars = createStars(this);
@@ -71,7 +73,7 @@ export default class GameScene extends Phaser.Scene {
 
     //  The score
     this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
-    
+
     //  Collide the player, stars and bombs with the platforms
     this.physics.add.collider(this.player, this.platforms);
     this.physics.add.collider(this.stars, this.platforms);
@@ -92,11 +94,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     // Input
-    const keyPress = {
-      left: this.keyPress.left.isDown,
-      right: this.keyPress.right.isDown,
-      up: this.keyPress.up.isDown
-    };
+    const keyPress = getNextMoveTo(this);
 
     // Launch moveTo action in game. This action sets velocity
     if (!isEqual(keyPress, this.lastMoveTo)) {
@@ -132,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
   // eslint-disable-next-line no-unused-vars
   collectStar(player, star) {
     star.disableBody(true, true);
-    
+
     // Update the score
     this.store.dispatch(gameSlice.actions.incrementScore('star'));
     if (this.stars.countActive(true) === 0) {
@@ -152,6 +150,37 @@ export default class GameScene extends Phaser.Scene {
     this.store.dispatch(gameSlice.actions.setGameOver(true));
   }
 }
+
+const getNextMoveTo = (that) => {
+  let next = {
+    left: false,
+    right: false,
+    up: false
+  };
+
+  // Pointer
+  if (that.pointer.isDown) {
+    const difX = Math.abs(that.pointer.x - that.player.body.position.x);
+    const difY = Math.abs(that.pointer.y - that.player.body.position.y);
+    if (difY > difX) {
+      next.up = that.pointer.y < that.player.body.position.y;
+    } else if (that.pointer.x > that.player.body.position.x) {
+      next.right = true;
+    } else {
+      next.left = true;
+    }
+  } else {
+    // Keyboard
+    next = {
+      left: that.keyPress.left.isDown,
+      right: that.keyPress.right.isDown,
+      up: that.keyPress.up.isDown
+    };
+  }
+
+  return next;
+};
+
 
 const saveInfo = (that) => {
   const info = {
@@ -201,7 +230,7 @@ const createAnimations = (that) => {
 
   that.anims.create({
     key: 'turn',
-    frames: [ { key: 'dude', frame: 4 } ],
+    frames: [{ key: 'dude', frame: 4 }],
     frameRate: 20
   });
 
