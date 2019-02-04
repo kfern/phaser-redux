@@ -60,7 +60,14 @@ export default class GameScene extends Phaser.Scene {
 
     // Input Events
     this.keyPress = this.input.keyboard.createCursorKeys();
-    this.pointer = this.input.activePointer;
+    this.input.on('pointerdown', function (pointer) {
+      // eslint-disable-next-line no-invalid-this
+      this.pointer = {
+        isDown: 25,
+        x: pointer.x,
+        y: pointer.y
+      };
+    }, this);
 
     //  Some stars to collect
     this.stars = createStars(this);
@@ -94,12 +101,12 @@ export default class GameScene extends Phaser.Scene {
     }
 
     // Input
-    const keyPress = getNextMoveTo(this);
+    const nextMoveTo = getNextMoveTo(this);
 
     // Launch moveTo action in game. This action sets velocity
-    if (!isEqual(keyPress, this.lastMoveTo)) {
-      this.lastMoveTo = keyPress;
-      this.store.dispatch(gameSlice.actions.moveTo(keyPress));
+    if (!isEqual(nextMoveTo, this.lastMoveTo)) {
+      this.lastMoveTo = nextMoveTo;
+      this.store.dispatch(gameSlice.actions.moveTo(nextMoveTo));
     }
 
     // Save info into state
@@ -159,7 +166,7 @@ const getNextMoveTo = (that) => {
   };
 
   // Pointer
-  if (that.pointer.isDown) {
+  if (that.pointer && that.pointer.isDown > 0) {
     const difX = Math.abs(that.pointer.x - that.player.body.position.x);
     const difY = Math.abs(that.pointer.y - that.player.body.position.y);
     if (difY > difX) {
@@ -168,6 +175,7 @@ const getNextMoveTo = (that) => {
       next.right = that.pointer.x > that.player.body.position.x;
       next.left = that.pointer.x < that.player.body.position.x;
     }
+    that.pointer.isDown--;
   } else {
     // Keyboard
     next = {
