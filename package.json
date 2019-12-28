@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "is-equal": "^1.5.5",
-    "phaser": "^3.3.0",
+    "phaser": "^3.21.0",
     "redux-starter-kit": "^0.4.0",
     "redux-watch": "^1.1.1"
   }
