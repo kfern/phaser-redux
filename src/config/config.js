@@ -7,9 +7,16 @@ const gameConfig = {
 
 export default {
   type: Phaser.AUTO,
-  parent: 'phaser-example',
-  width: gameConfig.width,
-  height: gameConfig.height,
+  scale: {
+    parent: 'phaser-example',
+    width: gameConfig.width,
+    height: gameConfig.height,
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
+  render: {
+    pixelArt: true,
+  },
   physics: {
     default: 'arcade',
     arcade: {
