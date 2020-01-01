@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "start": "npm run build && webpack-dev-server --port=8000",
-    "lint": "eslint --config .eslintrc.json \"src/**/*.js\""
+    "lint": "eslint --config .eslintrc.json \"src/**/*.js\"",
+    "test": "jest --watch --coverage"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/kfern/phaser-redux#readme",
   "devDependencies": {
     "eslint": "^5.12.1",
+    "jest": "^24.9.0",
     "raw-loader": "^0.5.1",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.11.5"
@@ -30,5 +32,8 @@
     "phaser": "^3.21.0",
     "redux-starter-kit": "^0.4.0",
     "redux-watch": "^1.1.1"
+  },
+  "jest": {
+    "verbose": true
   }
 }

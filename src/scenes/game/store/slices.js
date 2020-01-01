@@ -1,30 +1,32 @@
 const { createSlice } = require('redux-starter-kit');
 
+const initialState = {
+  config: {
+    velocity: 160
+  },
+  gameOver: false,
+  score: 0,
+  velocity: {
+    x: 0,
+    y: 0,
+    animation: 'turn'
+  },
+  moveTo: {
+    left: false,
+    right: false,
+    up: false
+  },
+  info: {
+    player: {
+      x: 0,
+      y: 0
+    }
+  }
+};
+
 const gameSlice = createSlice({
   slice: 'gameSlice',
-  initialState: {
-    config: {
-      velocity: 160
-    },
-    gameOver: false,
-    score: 0,
-    velocity: {
-      x: 0,
-      y: 0,
-      animation: 'turn'
-    },
-    moveTo: {
-      left: false,
-      right: false,
-      up: false
-    },
-    info: {
-      player: {
-        x: 0,
-        y: 0
-      }
-    }
-  },
+  initialState: initialState,
   reducers: {
     setGameOver: (state, action) => {
       state.gameOver = action.payload;
@@ -61,5 +63,6 @@ const gameSlice = createSlice({
 });
 
 module.exports = {
+  initialState,
   gameSlice
 };
