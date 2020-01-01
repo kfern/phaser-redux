@@ -7,7 +7,8 @@
     "build": "webpack",
     "start": "npm run build && webpack-dev-server --port=8000",
     "lint": "eslint --config .eslintrc.json \"src/**/*.js\"",
-    "test": "jest --watch --coverage"
+    "test": "jest",
+    "test:dev": "jest --watch --coverage"
   },
   "repository": {
     "type": "git",
