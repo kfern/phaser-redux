@@ -10,6 +10,11 @@ Combinar Phaser y Redux permite que el desarrollo de un juego sea más módular,
 
 El ejemplo está basado en el tutorial "Making your first Phaser 3 game" https://phaser.io/tutorials/making-your-first-phaser-3-game, utiliza "Phaser 3 Webpack Project Template" https://github.com/photonstorm/phaser3-project-template, "Redux Starter Kit" https://github.com/reduxjs/redux-starter-kit y "redux-watch" https://github.com/jprichardson/redux-watch
 
+# Demo
+
+Puedes jugar con la demo en https://kfern.github.io
+
+La demo de la rama next está disponible en https://kfern.github.io/next.html
 
 # Instalación
 ```
@@ -20,14 +25,30 @@ npm start
 ```
 Si todo fue bien, puedes acceder con el navegador a http://localhost:8000
 
+# Tests
+
+Cualquier aplicación tiene que ser testada. Si se puede hacer de forma automática, mejor ;-)
+
+Una vez instalada la aplicación se pueden ejecutar los tests mediante
+
+```
+npm test
+```
+Si todo ha ido bien, verás una salida como la siguiente:
+
+![Tests Ok. Coverage 100% ](https://github.com/kfern/phaser-redux/blob/master/docs/images/tests-and-coverage_1.3.2.png)
+
+El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/commit/f3e4a1eff6375f978ec085eabdaee0904f62a809/checks?check_suite_id=380823417#step:4:90)
+
 # Idioma
 El idioma oficial de la documentación y gestión del repositorio es el Español, por lo que no es necesario usar el idioma inglés para abrir o comentar un "Issue" o en los "Pull request" o hacer cualquier pregunta.
 
 Por otra parte, el idioma para los comentarios en el código fuente es el inglés. Si envías un PR y no tienes nivel suficiente puedes usar Google Translate.
+
 # Posibles mejoras
 Lista de mejoras que se podrían implementar. Quien esté intesado en colaborar puede enviar un PR o abrir un Issue.
 * ~~Poder jugar con pantalla táctil y ratón.~~ Versión 1.1.0
 * ~~Adaptar el tamaño del juego al de la pantalla.~~ Versión 1.3.0. @gammafp
 * Refactorizar estrellas y bombas para que sean clases independientes.
 * Añadir en el estado todo lo necesario para poder ver con devTools la pantalla completa en cada instante. Ahora sólo se gestionan la puntuación y la animación que se aplica al player.
-* Añadir tests de ejemplo
+* Añadir tests de ejemplo [WIP] https://github.com/kfern/phaser-redux/issues/11
