@@ -45,7 +45,7 @@ Si todo ha ido bien, verás una salida como la siguiente:
 
 ![Tests Ok. Coverage 100% ](https://github.com/kfern/phaser-redux/blob/master/docs/images/tests-and-coverage_1.3.2.png)
 
-El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/commit/ad88aa2e0a87bbcd2d4ffd325c5807d70cc195cb/checks?check_suite_id=387834999#step:4:100)
+El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/commit/ed0cb84f64e886b0a593cb34a3d4a1e21d9fabd2/checks?check_suite_id=388062128#step:4:100)
 
 # Idioma
 El idioma oficial de la documentación y gestión del repositorio es el Español, por lo que no es necesario usar el idioma inglés para abrir o comentar un "Issue" o en los "Pull request" o hacer cualquier pregunta.
