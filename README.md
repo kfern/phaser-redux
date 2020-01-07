@@ -33,18 +33,19 @@ Se ejecutan dos tests diferentes: Uno sobre la lógica y otro visual.
 
 En los tests visuales de esta versión se esperan unos segundos (menos de 30) para que el juego avance al menos hasta que todas las estrellas estén paradas. En ese instante se captura la pantalla y se comprueba si la diferencia entre esta captura y la imagen esperada es superior a un número de pixels. Solo deben ser diferentes la bola (que está en movimiento) y si el personaje ha sido alcanzado. A 800x600, con 850 es suficiente. 
 
-En local se abre una ventana en el navegador. Se puede cerrar sin que afecte a los tests. Una posible mejora sería que no se mostrara.
-
 Una vez instalada la aplicación se pueden ejecutar los tests mediante
 
 ```
 npm test
 ```
+
+En local se abre una ventana en el navegador. Se puede cerrar sin que afecte a los tests. Una posible mejora sería que no se mostrara.
+
 Si todo ha ido bien, verás una salida como la siguiente:
 
 ![Tests Ok. Coverage 100% ](https://github.com/kfern/phaser-redux/blob/master/docs/images/tests-and-coverage_1.3.2.png)
 
-El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/commit/f3e4a1eff6375f978ec085eabdaee0904f62a809/checks?check_suite_id=380823417#step:4:90)
+El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/commit/ad88aa2e0a87bbcd2d4ffd325c5807d70cc195cb/checks?check_suite_id=387834999#step:4:100)
 
 # Idioma
 El idioma oficial de la documentación y gestión del repositorio es el Español, por lo que no es necesario usar el idioma inglés para abrir o comentar un "Issue" o en los "Pull request" o hacer cualquier pregunta.
