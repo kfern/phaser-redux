@@ -1,4 +1,4 @@
-name: Node CI
+name: Logic and Visual Tests
 
 on: [push]
 
@@ -24,3 +24,8 @@ jobs:
         npm test
       env:
         CI: true
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: visualDiff game
+        path: test/visual/game/__image_snapshots__/__diff_output__
