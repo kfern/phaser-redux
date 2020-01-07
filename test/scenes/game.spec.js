@@ -1,5 +1,5 @@
-const { store, gameSlice } = require('../../../src/scenes/game/store');
-const { initialState } = require('../../../src/scenes/game/store/slices');
+const { store, gameSlice } = require('../../src/scenes/game/store');
+const { initialState } = require('../../src/scenes/game/store/slices');
 
 describe('store', () => {
   let storeTesting;
