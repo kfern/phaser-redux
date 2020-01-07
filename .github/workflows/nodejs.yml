@@ -28,4 +28,4 @@ jobs:
       if: failure()
       with:
         name: visualDiff game
-        path: test/visual/game/__image_snapshots__/__diff_output__
+        path: test/visual/game/__image_snapshots__
