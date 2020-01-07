@@ -36,7 +36,7 @@ describe('scenes/game', () => {
       await page.keyboard.press('ArrowRight', {delay: 1000});
     }
     const image = await page.screenshot();
-    const maxDiff = 700 + 300;// bomb + pixels of player
+    const maxDiff = 700 + 700;// bomb + pixels of player + S
     const options = {
       customSnapshotIdentifier: 'game-arrow-right.png',
       failureThreshold: maxDiff, 
@@ -50,7 +50,7 @@ describe('scenes/game', () => {
       await page.keyboard.press('ArrowLeft', {delay: 1000});
     }
     const image = await page.screenshot();
-    const maxDiff = 700 + 300;// bomb + pixels of player
+    const maxDiff = 700 + 700;// bomb + pixels of player
     const options = {
       customSnapshotIdentifier: 'game-arrow-left.png',
       failureThreshold: maxDiff, 
@@ -64,7 +64,7 @@ describe('scenes/game', () => {
       await page.keyboard.press('ArrowUp', {delay: 1000});
     }
     const image = await page.screenshot();
-    const maxDiff = 700 + 300;// bomb + pixels of player
+    const maxDiff = 700 + 700;// bomb + pixels of player
     const options = {
       customSnapshotIdentifier: 'game-arrow-up.png',
       failureThreshold: maxDiff, 
