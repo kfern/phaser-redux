@@ -29,6 +29,12 @@ Si todo fue bien, puedes acceder con el navegador a http://localhost:8000
 
 Cualquier aplicación tiene que ser testada. Si se puede hacer de forma automática, mejor ;-)
 
+Se ejecutan dos tests diferentes: Uno sobre la lógica y otro visual. 
+
+En los tests visuales de esta versión se esperan unos segundos (menos de 30) para que el juego avance al menos hasta que todas las estrellas estén paradas. En ese instante se captura la pantalla y se comprueba si la diferencia entre esta captura y la imagen esperada es superior a un número de pixels. Solo deben ser diferentes la bola (que está en movimiento) y si el personaje ha sido alcanzado. A 800x600, con 850 es suficiente. 
+
+En local se abre una ventana en el navegador. Se puede cerrar sin que afecte a los tests. Una posible mejora sería que no se mostrara.
+
 Una vez instalada la aplicación se pueden ejecutar los tests mediante
 
 ```
