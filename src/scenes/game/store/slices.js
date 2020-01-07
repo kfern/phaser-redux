@@ -4,6 +4,7 @@ const initialState = {
   config: {
     velocity: 160
   },
+  inmunity: 5,
   gameOver: false,
   score: 0,
   velocity: {
@@ -29,24 +30,32 @@ const gameSlice = createSlice({
   initialState: initialState,
   reducers: {
     setGameOver: (state, action) => {
-      state.gameOver = action.payload;
+      state.gameOver = action.payload && state.inmunity < 1;
     },
-
+    setInmunity: (state, action) => {
+      state.inmunity = action.payload;
+    },
     moveTo: (state, action) => {
       // mutate the state all you want with immer            
       state.moveTo = action.payload;
 
+      // animation
       let animation = 'turn';
       if (state.moveTo.left) {
         animation = 'left';
       } else if (state.moveTo.right) {
         animation = 'right';
       }
+
+      // velocity
       state.velocity = {
         x: state.config.velocity * ((state.moveTo.left * -1) + (state.moveTo.right * 1)),
         y: state.config.velocity * state.moveTo.up * -2,
         animation
       };
+
+      // Reduce Inmunity
+      state.inmunity--;
     },
 
     incrementScore: (state, action) => {

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scenes/game start with default values 1`] = `
+Object {
+  "gameSlice": Object {
+    "config": Object {
+      "velocity": 160,
+    },
+    "gameOver": false,
+    "info": Object {
+      "player": Object {
+        "x": 0,
+        "y": 0,
+      },
+    },
+    "inmunity": 5,
+    "moveTo": Object {
+      "left": false,
+      "right": false,
+      "up": false,
+    },
+    "score": 0,
+    "velocity": Object {
+      "animation": "turn",
+      "x": 0,
+      "y": 0,
+    },
+  },
+}
+`;

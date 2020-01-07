@@ -10,6 +10,7 @@ describe('scenes/game', () => {
   it('start with default values', async () => {
     const result = await storeTesting.getState();
     expect(result.gameSlice).toBe(initialState);
+    expect(result).toMatchSnapshot();
   });
 
   it('action: moveTo right', async () => {
@@ -68,13 +69,23 @@ describe('scenes/game', () => {
     expect(result.gameSlice.score).toBeGreaterThan(initialState.score);
   });
 
-  it('action: setGameOver true', async () => {
+  it('action: setGameOver true with inmunity', async () => {
+    await storeTesting.dispatch(gameSlice.actions.setInmunity(100));
+    await storeTesting.dispatch(gameSlice.actions.setGameOver(true));
+
+    // Checks
+    const result = storeTesting.getState();
+    expect(result.gameSlice.gameOver).toBe(false);
+  });
+
+  it('action: setGameOver true without inmunity', async () => {
+    await storeTesting.dispatch(gameSlice.actions.setInmunity(0));
     await storeTesting.dispatch(gameSlice.actions.setGameOver(true));
 
     // Checks
     const result = storeTesting.getState();
     expect(result.gameSlice.gameOver).toBe(true);
-  });
+  });  
 
   it('action: setinfo', async () => {
     const infoData = {
@@ -87,6 +98,27 @@ describe('scenes/game', () => {
     expect(result.gameSlice.info).toBe(infoData);
   });
 
+  it('action: setInmunity', async () => {
+    const steps = 1; // moveTo inmune steps
+    await storeTesting.dispatch(gameSlice.actions.setInmunity(steps));
+
+    // Checks Before
+    const resultBefore = storeTesting.getState();
+    expect(resultBefore.gameSlice.inmunity).toBe(steps);
+
+    // moveTo must reduce inmunity
+    const nextMoveTo = {
+      left: false,
+      right: false,
+      up: true
+    };
+    await storeTesting.dispatch(gameSlice.actions.moveTo(nextMoveTo));
+
+    // Checks After
+    const resultAtfer = storeTesting.getState();
+    expect(resultAtfer.gameSlice.inmunity).toBe(steps-1);
+
+  });  
 });
 
 
