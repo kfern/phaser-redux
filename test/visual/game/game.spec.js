@@ -22,7 +22,7 @@ describe('scenes/game', () => {
   it('should match visual screenshot', async () => {
     await page.waitFor(27000); // 27 Seconds. All stars must be stopped
     const image = await page.screenshot();
-    const maxDiff = 250 + 600; // bomb + player
+    const maxDiff = 300 + 1000; // bomb + player
     const options = {
       customSnapshotIdentifier: 'game-init.png',
       failureThreshold: maxDiff, 
