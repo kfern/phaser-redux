@@ -47,6 +47,7 @@
     "redux-watch": "^1.1.1"
   },
   "jest": {
+    "verbose": false,
     "preset": "jest-puppeteer"
   }
 }

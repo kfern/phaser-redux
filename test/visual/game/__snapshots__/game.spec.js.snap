@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scenes/game should match html snapshot 1`] = `
+"<!DOCTYPE html><html lang=\\"en\\" style=\\"height: 100%;\\"><head>
+    <meta charset=\\"UTF-8\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\">
+    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"ie=edge\\">
+    <title>Phaser Redux</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        body {
+            background-color: #2c3e50;
+        }
+    </style>
+</head>
+  <body style=\\"height: 100%;\\">
+  <script type=\\"text/javascript\\" src=\\"main.js\\"></script>
+
+<canvas width=\\"800\\" height=\\"600\\" style=\\"image-rendering: pixelated; width: 800px; height: 600px; margin-left: 0px; margin-top: 0px;\\"></canvas></body></html>"
+`;
