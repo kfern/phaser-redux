@@ -14,6 +14,7 @@ export default class GameScene extends Phaser.Scene {
     this.stars = null;
     this.bombs = null;
     this.scoreText = null;
+    this.playerbombCollider = null;
 
     // The store (a redux store) and change handlers
     this.store = store;
@@ -90,15 +91,20 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
 
     //  Checks to see if the player collides with any ot the bombs.
-    this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
+    this.playerbombCollider = this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
   }
 
   // eslint-disable-next-line no-unused-vars
   update(time, delta) {
+    const actualState = this.store.getState();
+    
     // Return if gameOver
-    if (this.store.getState().gameSlice.gameOver) {
+    if (actualState.gameSlice.gameOver) {
       return;
     }
+
+    // Inmunity
+    this.playerbombCollider.active = actualState.gameSlice.inmunity < 0;
 
     // Input
     const nextMoveTo = getNextMoveTo(this);
