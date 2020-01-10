@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --config webpack/base.js --open",
     "lint": "eslint --config .eslintrc.json \"src/**/*.js\"",
     "test": "jest --coverage",
-    "test:dev": "jest --watch --coverage"
+    "test:dev": "jest --watch --coverage",
+    "test:dev:logic": "jest --watch --coverage test/logic"
   },
   "repository": {
     "type": "git",
