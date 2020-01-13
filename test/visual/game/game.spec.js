@@ -60,7 +60,7 @@ describe('scenes/game', () => {
 
     // Compare screenshot. Score should be 20
     const imageRight = await page.screenshot();
-    const maxDiff = 700;// bomb + font
+    const maxDiff = 800;// bomb + GitHub Actions font
     const options = {
       customSnapshotIdentifier: 'game-right.png',
       failureThreshold: maxDiff,
