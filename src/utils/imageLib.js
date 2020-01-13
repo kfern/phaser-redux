@@ -40,7 +40,7 @@ const getGridBase = (dimensions) => {
 };
 
 // eslint-disable-next-line no-alert
-const getImageFromFile = async (filePath) => {
+const getImageFrom = async (filePath) => {
   const image = await ImageJs.load(filePath);
   return Promise.resolve(image);
 };
@@ -123,8 +123,8 @@ const findImageInImage = async (imageContainer, imageFind, regionW, regionH) => 
 
 module.exports = {
   getGridBase,
+  getImageFrom,
   getSimilarity,
-  getImageFromFile,
   findImageInImage,
   getImageFromImage,
   getImageWithThreshold,

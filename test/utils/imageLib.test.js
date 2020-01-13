@@ -7,8 +7,8 @@ const getTDD = () => {
 
 const {
   getGridBase,
+  getImageFrom,
   getSimilarity,
-  getImageFromFile,
   findImageInImage,
   getImageFromImage,
   getImageWithThreshold,
@@ -109,14 +109,14 @@ describe('imageLib', () => {
       });
     });
 
-    it('getImageFromFile', async () => {
+    it('getImageFrom', async () => {
       const filePath = './test/utils/images/dude.png';
-      const image = await getImageFromFile(filePath);
+      const image = await getImageFrom(filePath);
       expect(image.width).toBe(288);
       expect(image.height).toBe(48);
       const maxDiff = 0;
       const options = {
-        customSnapshotIdentifier: 'getImageFromFile',
+        customSnapshotIdentifier: 'getImageFrom',
         failureThreshold: maxDiff,
         failureThresholdType: 'pixel'
       }
@@ -125,7 +125,7 @@ describe('imageLib', () => {
 
     it('getImageWithThreshold', async () => {
       const filePath = './test/utils/images/game-init-left.png';
-      const image = await getImageFromFile(filePath);
+      const image = await getImageFrom(filePath);
       const threshold = 205;
       const imageWithThreshold = await getImageWithThreshold(image, threshold, 'black');
       const maxDiff = 0;
@@ -154,7 +154,7 @@ describe('imageLib', () => {
 
     it('getImageFromImage', async () => {
       const filePath = './test/utils/images/dude.png';
-      const imagesDude = await getImageFromFile(filePath);
+      const imagesDude = await getImageFrom(filePath);
       const dimensions = {
         container: {
           w: imagesDude.width,
@@ -186,9 +186,9 @@ describe('imageLib', () => {
 
       // Get images
       const filePathF = './test/utils/images/dude-left.png';
-      const imageFind = await getImageFromFile(filePathF);
+      const imageFind = await getImageFrom(filePathF);
       const filePathC = './test/utils/images/game-init-left.png';
-      const imageContainer = await getImageFromFile(filePathC);
+      const imageContainer = await getImageFrom(filePathC);
       // get Regions
       const region = {
         w: imageContainer.width / 10,
@@ -213,7 +213,7 @@ describe('imageLib', () => {
   describe('integration tests', () => {
     it('find By Similarity', async () => {
       const filePath = './test/utils/images/dude.png';
-      const imagesDude = await getImageFromFile(filePath);
+      const imagesDude = await getImageFrom(filePath);
       const dimensions = {
         container: {
           w: imagesDude.width,
