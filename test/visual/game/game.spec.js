@@ -57,16 +57,6 @@ describe('scenes/game', () => {
     const result = findData.filter(i => i.found > 0).sort((a, b) => b.found - a.found);
     expect(result[0].row).toBe(lastCell.row);
     expect(result[0].column).toBe(lastCell.column);
-
-    // Compare screenshot. Score should be 20
-    const imageRight = await page.screenshot();
-    const maxDiff = 800;// bomb + GitHub Actions font
-    const options = {
-      customSnapshotIdentifier: 'game-right.png',
-      failureThreshold: maxDiff,
-      failureThresholdType: 'pixel'
-    }
-    await expect(imageRight).toMatchImageSnapshot(options);
   }, 12000); // 12 Seconds
 
   it('should match visual screenshot when move to the left', async () => {
