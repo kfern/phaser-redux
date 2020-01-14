@@ -51,7 +51,7 @@ describe('scenes/game', () => {
     const imageJsFromCanvas = await getImageFrom(canvas);
 
     // Visual diff
-    const maxDiff = 900;
+    const maxDiff = 1000;
     const options = {
       customSnapshotIdentifier: 'game-right',
       failureThreshold: maxDiff,
