@@ -28,9 +28,9 @@ describe('scenes/game', () => {
   it('should match visual screenshot (init)', async () => {
     await page.waitFor(27000); // 27 Seconds. All stars must be stopped
     const image = await page.screenshot();
-    const maxDiff = 700// bomb
+    const maxDiff = 700;
     const options = {
-      customSnapshotIdentifier: 'game-init.png',
+      customSnapshotIdentifier: 'game-init',
       failureThreshold: maxDiff,
       failureThresholdType: 'pixel'
     }
@@ -49,6 +49,15 @@ describe('scenes/game', () => {
     // Capture ScreenShot
     const canvas = await page.screenshot();
     const imageJsFromCanvas = await getImageFrom(canvas);
+
+    // Visual diff
+    const maxDiff = 700;
+    const options = {
+      customSnapshotIdentifier: 'game-right',
+      failureThreshold: maxDiff,
+      failureThresholdType: 'pixel'
+    }
+    await expect(canvas).toMatchImageSnapshot(options);    
 
     // Find left dude o similar in ScreenShot
     const findData = await findImageInImage(imageJsFromCanvas, imageToFind, imageJsFromCanvas.width / 4, imageJsFromCanvas.height / 4);

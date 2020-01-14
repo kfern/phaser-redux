@@ -80,7 +80,7 @@ export default class GameScene extends Phaser.Scene {
     addBomb(this.bombs, this.player);
 
     //  The score
-    this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000', fontFamily: '"Roboto Condensed"' });
 
     //  Collide the player, stars and bombs with the platforms
     this.physics.add.collider(this.player, this.platforms);

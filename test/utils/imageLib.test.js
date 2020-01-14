@@ -276,5 +276,6 @@ describe('imageLib', () => {
       // Check
       expect(itemsFound).toBe(1);
     });    
+
   });
 });
