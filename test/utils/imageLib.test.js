@@ -11,6 +11,7 @@ const {
   getSimilarity,
   findImageInImage,
   getImageFromImage,
+  getItemsFoundInImage,
   getImageWithThreshold,
   getAllColorsFromColorHistogram
 } = require('../../src/utils/imageLib')
@@ -208,6 +209,20 @@ describe('imageLib', () => {
       };
       await expect(await result[0].image.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
     });
+
+    it('getItemsFoundInImage', async () => {
+      // How many stars are in the image?
+      // Get images
+      const filePathItem = './test/utils/images/star.png';
+      const imageItem = await getImageFrom(filePathItem);
+      const filePathScene = './test/utils/images/game-init-stars-mov.png';
+      const imageScene = await getImageFrom(filePathScene);
+      // Act: How many stars are in the image?
+      const itemsFound = await getItemsFoundInImage(imageItem, imageScene);
+      // Check
+      expect(itemsFound).toBe(12);
+    });    
+
   });
 
   describe('integration tests', () => {
@@ -248,5 +263,18 @@ describe('imageLib', () => {
       expect(parseInt(result[0].similarity * 100)).toBe(100); // 100%
     });
 
+    it('How many boms are in the image?', async () => {
+      // Get images
+      const filePathItem = './test/utils/images/bomb.png';
+      const imageItem = await getImageFrom(filePathItem);
+      const filePathScene = './test/utils/images/game-init-stars-mov.png';
+      const imageScene = await getImageFrom(filePathScene);
+
+      // Act: How many boms are in the image?
+      const itemsFound = await getItemsFoundInImage(imageItem, imageScene);
+
+      // Check
+      expect(itemsFound).toBe(1);
+    });    
   });
 });

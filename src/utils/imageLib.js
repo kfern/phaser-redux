@@ -118,8 +118,22 @@ const findImageInImage = async (imageContainer, imageFind, regionW, regionH) => 
     findData.push(newData);
   }
   return Promise.resolve(findData);
-
 };
+
+const getItemsFoundInImage = async (imageItem, imageScene) => {
+  // item colors 
+  const colorsItem = await getAllColorsFromColorHistogram(await imageItem.getColorHistogram({ nbSlots: 512 }));
+  colorsItem.sort((a, b) => b.value - a.value);
+
+  // scena colors
+  const colorsScene = await getAllColorsFromColorHistogram(await imageScene.getColorHistogram({ nbSlots: 512 }));
+  const ColorsFoundInScene = colorsScene.filter(i => i.index === colorsItem[0].index)[0];
+
+  // How many items are in the image?
+  const itemsFound = parseInt((ColorsFoundInScene.value / colorsItem[0].value) + .5);
+  
+  return Promise.resolve(itemsFound);
+}
 
 module.exports = {
   getGridBase,
@@ -127,6 +141,7 @@ module.exports = {
   getSimilarity,
   findImageInImage,
   getImageFromImage,
+  getItemsFoundInImage,
   getImageWithThreshold,
   getAllColorsFromColorHistogram
 };

@@ -3,7 +3,8 @@ expect.extend({ toMatchImageSnapshot });
 
 const {
   getImageFrom,
-  findImageInImage
+  findImageInImage,
+  getItemsFoundInImage
 } = require('../../../src/utils/imageLib');
 
 const gameUrl = 'http://127.0.0.1:8080';
@@ -57,6 +58,21 @@ describe('scenes/game', () => {
     const result = findData.filter(i => i.found > 0).sort((a, b) => b.found - a.found);
     expect(result[0].row).toBe(lastCell.row);
     expect(result[0].column).toBe(lastCell.column);
+
+    // How many stars are in the Scene?
+    const filePathStar = './test/utils/images/star.png';
+    const imageStar = await getImageFrom(filePathStar);
+    // Act: How many stars are in the image?
+    const starsFound = await getItemsFoundInImage(imageStar, imageJsFromCanvas);
+    // Check Stars. 2 stars have been recollected, so there are 10 stars
+    expect(starsFound).toBe(10);
+    // How many bombs are in the Scene?
+    const filePathBomb = './test/utils/images/bomb.png';
+    const imageBomb = await getImageFrom(filePathBomb);
+    // Act: How many bombs are in the image?
+    const bombsFound = await getItemsFoundInImage(imageBomb, imageJsFromCanvas);
+    // Check Bombs
+    expect(bombsFound).toBe(1);
   }, 12000); // 12 Seconds
 
   it('should match visual screenshot when move to the left', async () => {

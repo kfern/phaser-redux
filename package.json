@@ -7,9 +7,9 @@
     "build": "webpack --config webpack/prod.js ",
     "start": "webpack-dev-server --config webpack/base.js --open",
     "lint": "eslint --config .eslintrc.json \"src/**/*.js\"",
-    "test": "jest --coverage",
+    "test": "cross-env VISUAL=true jest --coverage",
     "test:dev": "jest --watch --coverage",
-    "test:dev:logic": "jest --watch --coverage test/logic"
+    "test:logic": "jest --watch --coverage test/logic"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "@babel/preset-env": "^7.7.7",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^6.0.3",
     "eslint": "^5.12.1",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
