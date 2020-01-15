@@ -13,7 +13,7 @@ Object {
         "y": 0,
       },
     },
-    "inmunity": 150,
+    "inmunity": 100,
     "moveTo": Object {
       "left": false,
       "right": false,
