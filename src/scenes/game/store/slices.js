@@ -4,7 +4,7 @@ const initialState = {
   config: {
     velocity: 160
   },
-  inmunity: 150,
+  inmunity: 100,
   gameOver: false,
   score: 0,
   velocity: {
