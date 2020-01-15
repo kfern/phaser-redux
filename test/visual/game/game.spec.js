@@ -65,6 +65,19 @@ describe('scenes/game', () => {
 
     // Check row and column. Must be in the right of the screen
     const result = findData.filter(i => i.found > 0).sort((a, b) => b.found - a.found);
+
+    // ScreenShot for analysis
+    if (result.length === 0){
+      const maxDiff = 0;
+      const options = {
+        customSnapshotIdentifier: 'move-right',
+        failureThreshold: maxDiff,
+        failureThresholdType: 'pixel'
+      }
+      await expect(image).toMatchImageSnapshot(options);
+    }
+    // Sometimes, the following line causes a TypeError: Cannot read property 'row' of undefined
+    // If this happens, repeat the test
     expect(result[0].row).toBe(lastCell.row);
     expect(result[0].column).toBe(lastCell.column);
 
@@ -103,6 +116,19 @@ describe('scenes/game', () => {
 
     // Check row and column. Must be in the left of the screen
     const result = findData.filter(i => i.found > 0).sort((a, b) => b.found - a.found);
+
+    // ScreenShot for analysis
+    if (result.length === 0){
+      const maxDiff = 0;
+      const options = {
+        customSnapshotIdentifier: 'move-left',
+        failureThreshold: maxDiff,
+        failureThresholdType: 'pixel'
+      }
+      await expect(image).toMatchImageSnapshot(options);
+    }
+    // Sometimes, the following line causes a TypeError: Cannot read property 'row' of undefined
+    // If this happens, repeat the test
     expect(result[0].row).toBe(lastCell.row);
     expect(result[0].column).toBe(0);
   }, 12000); // 12 Seconds
@@ -126,6 +152,19 @@ describe('scenes/game', () => {
 
     // Check row and column. It should be on the left of the screen, on the floor
     const result = findData.filter(i => i.found > 0).sort((a, b) => b.found - a.found);
+    
+    // ScreenShot for analysis
+    if (result.length === 0){
+      const maxDiff = 0;
+      const options = {
+        customSnapshotIdentifier: 'move-up',
+        failureThreshold: maxDiff,
+        failureThresholdType: 'pixel'
+      }
+      await expect(image).toMatchImageSnapshot(options);
+    }
+    // Sometimes, the following line causes a TypeError: Cannot read property 'row' of undefined
+    // If this happens, repeat the test
     expect(result[0].row).toBeLessThan(lastCell.row);
     expect(result[0].column).toBe(0); // It's in the left
   }, 12000); // 12 Seconds  
