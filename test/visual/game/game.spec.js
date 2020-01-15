@@ -74,7 +74,7 @@ describe('scenes/game', () => {
         failureThreshold: maxDiff,
         failureThresholdType: 'pixel'
       }
-      await expect(image).toMatchImageSnapshot(options);
+      await expect(canvas).toMatchImageSnapshot(options);
     }
     // Sometimes, the following line causes a TypeError: Cannot read property 'row' of undefined
     // If this happens, repeat the test
@@ -125,7 +125,7 @@ describe('scenes/game', () => {
         failureThreshold: maxDiff,
         failureThresholdType: 'pixel'
       }
-      await expect(image).toMatchImageSnapshot(options);
+      await expect(canvas).toMatchImageSnapshot(options);
     }
     // Sometimes, the following line causes a TypeError: Cannot read property 'row' of undefined
     // If this happens, repeat the test
@@ -161,7 +161,7 @@ describe('scenes/game', () => {
         failureThreshold: maxDiff,
         failureThresholdType: 'pixel'
       }
-      await expect(image).toMatchImageSnapshot(options);
+      await expect(canvas).toMatchImageSnapshot(options);
     }
     // Sometimes, the following line causes a TypeError: Cannot read property 'row' of undefined
     // If this happens, repeat the test
