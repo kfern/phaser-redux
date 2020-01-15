@@ -64,7 +64,7 @@ const getAllColorsFromColorHistogram = async (colorHistogramArray) => {
     return {
       index,
       value
-    }
+    };
   }).filter(r => r.value > 0);
   return Promise.resolve(data);
 };
@@ -109,12 +109,7 @@ const findImageInImage = async (imageContainer, imageFind, regionW, regionH) => 
     const tmpImage = await getImageFromImage(imageContainer, item);
     const tmpImageColorHistogram = await getAllColorsFromColorHistogram(await tmpImage.getColorHistogram({ nbSlots: 512 }));
     const tmpColor = tmpImageColorHistogram.filter(i => i.index === colorImageFind[0].index);
-    const newData = {
-      row: item.row,
-      column: item.column,
-      found: tmpColor.length === 1 ? tmpColor[0].value : 0,
-      image: tmpImage
-    };
+    const newData = Object.assign({}, item, {found: tmpColor.length === 1 ? tmpColor[0].value : 0});
     findData.push(newData);
   }
   return Promise.resolve(findData);
@@ -130,10 +125,10 @@ const getItemsFoundInImage = async (imageItem, imageScene) => {
   const ColorsFoundInScene = colorsScene.filter(i => i.index === colorsItem[0].index)[0];
 
   // How many items are in the image?
-  const itemsFound = parseInt((ColorsFoundInScene.value / colorsItem[0].value) + .5);
+  const itemsFound = parseInt((ColorsFoundInScene.value / colorsItem[0].value) + 0.5);
   
   return Promise.resolve(itemsFound);
-}
+};
 
 module.exports = {
   getGridBase,

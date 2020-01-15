@@ -207,7 +207,8 @@ describe('imageLib', () => {
         failureThreshold: maxDiff,
         failureThresholdType: 'pixel'
       };
-      await expect(await result[0].image.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
+      const resultImage = await getImageFromImage(imageContainer, result[0]);
+      await expect(await resultImage.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
     });
 
     it('getItemsFoundInImage', async () => {

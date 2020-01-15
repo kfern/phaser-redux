@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --config webpack/base.js --open",
     "lint": "eslint --config .eslintrc.json \"src/**/*.js\"",
     "test": "cross-env VISUAL=true jest --coverage",
-    "test:dev": "jest --watch --coverage",
+    "test:dev": "cross-env VISUAL=true jest --watch --coverage",
     "test:logic": "jest --watch --coverage test/logic"
   },
   "repository": {
