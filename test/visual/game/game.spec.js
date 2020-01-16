@@ -42,9 +42,7 @@ describe('scenes/game', () => {
     const imageToFind = await getImageFrom('./test/utils/images/dude-left.png');
 
     // Move to the right
-    for (let index = 0; index < 5; index++) {
-      await page.keyboard.press('ArrowRight', { delay: 1000 });
-    }
+    await page.keyboard.press('ArrowRight', { delay: 5000 });
 
     // Capture ScreenShot
     const canvas = await page.screenshot();
@@ -102,9 +100,7 @@ describe('scenes/game', () => {
     const imageToFind = await getImageFrom('./test/utils/images/dude-left.png');
 
     // Move to the left
-    for (let index = 0; index < 5; index++) {
-      await page.keyboard.press('ArrowLeft', { delay: 1000 });
-    }
+    await page.keyboard.press('ArrowLeft', { delay: 5000 });
 
     // Capture ScreenShot
     const canvas = await page.screenshot();

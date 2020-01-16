@@ -1,10 +1,6 @@
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
-const getTDD = () => {
-  return Promise.resolve(false);
-};
-
 const {
   getGridBase,
   getImageFrom,
@@ -222,7 +218,7 @@ describe('imageLib', () => {
       const itemsFound = await getItemsFoundInImage(imageItem, imageScene);
       // Check
       expect(itemsFound).toBe(12);
-    });    
+    });
 
   });
 
@@ -276,7 +272,23 @@ describe('imageLib', () => {
 
       // Check
       expect(itemsFound).toBe(1);
-    });    
+    });
 
+    it('test morphologicalGradient', async () => {
+      const filePathItem = './test/utils/images/game-over.png';
+      const imageItem = await getImageFrom(filePathItem);
+      const resultImage = imageItem.grey().morphologicalGradient();
+
+      // Visual SnapShot
+      const maxDiff = 0;
+      const options = {
+        customSnapshotIdentifier: 'morphologicalGradient',
+        failureThreshold: maxDiff,
+        failureThresholdType: 'pixel'
+      };
+      await expect(await resultImage.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
+      
+    });
   });
+
 });
