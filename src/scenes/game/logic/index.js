@@ -1,13 +1,13 @@
 const { createStore, combineReducers } = require('redux');
 const { devToolsEnhancer } = require('redux-devtools-extension');
 
-const { gameSlice } = require('./slices');
+const { gameController } = require('./gameController');
 
 const gameLogic = combineReducers({
-  gameSlice: gameSlice.reducer
+  gameController: gameController.reducer
 });
 
-const store = createStore(gameLogic, /* preloadedState, */ devToolsEnhancer(
+const gameStore = createStore(gameLogic, /* preloadedState, */ devToolsEnhancer(
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
   {
     actionsBlacklist: [ 'gameSlice/setInfo' ] // hide this actions in redux devTools
@@ -15,6 +15,6 @@ const store = createStore(gameLogic, /* preloadedState, */ devToolsEnhancer(
 ));
 
 module.exports = {
-  store,
-  gameSlice
+  gameStore,
+  gameController
 };

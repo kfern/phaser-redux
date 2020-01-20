@@ -2,7 +2,7 @@
 
 exports[`scenes/game start with default values 1`] = `
 Object {
-  "gameSlice": Object {
+  "gameController": Object {
     "config": Object {
       "velocity": 160,
     },

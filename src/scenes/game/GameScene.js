@@ -1,7 +1,7 @@
 import 'phaser';
 import isEqual from 'is-equal';
 import { watchStore } from '../../utils/watchStore';
-import { store, gameSlice } from './store';
+import { gameStore, gameController } from './logic';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -16,8 +16,8 @@ export default class GameScene extends Phaser.Scene {
     this.scoreText = null;
     this.playerbombCollider = null;
 
-    // The store (a redux store) and change handlers
-    this.store = store;
+    // The gameStore (a redux store) and change handlers
+    this.gameStore = gameStore;
     this.gameOver = this.gameOver.bind(this);
     this.handleMovePlayer = this.handleMovePlayer.bind(this);
     this.renderScoreValue = this.renderScoreValue.bind(this);
@@ -37,13 +37,13 @@ export default class GameScene extends Phaser.Scene {
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
     // When state.objectPath change, run onChange function
-    // For example: When gameSlice.velocity change, run handleMovePlayer
+    // For example: When gameController.velocity change, run handleMovePlayer
     const storeMonitor = [
-      { objectPath: 'gameSlice.gameOver', onChange: this.gameOver },
-      { objectPath: 'gameSlice.score', onChange: this.renderScoreValue },
-      { objectPath: 'gameSlice.velocity', onChange: this.handleMovePlayer }
+      { objectPath: 'gameController.gameOver', onChange: this.gameOver },
+      { objectPath: 'gameController.score', onChange: this.renderScoreValue },
+      { objectPath: 'gameController.velocity', onChange: this.handleMovePlayer }
     ];
-    watchStore(store, storeMonitor);
+    watchStore(gameStore, storeMonitor);
   }
 
   create() {
@@ -96,15 +96,15 @@ export default class GameScene extends Phaser.Scene {
 
   // eslint-disable-next-line no-unused-vars
   update(time, delta) {
-    const actualState = this.store.getState();
+    const actualState = this.gameStore.getState();
     
     // Return if gameOver
-    if (actualState.gameSlice.gameOver) {
+    if (actualState.gameController.gameOver) {
       return;
     }
 
     // Inmunity
-    this.playerbombCollider.active = actualState.gameSlice.inmunity < 0;
+    this.playerbombCollider.active = actualState.gameController.inmunity < 0;
 
     // Input
     const nextMoveTo = getNextMoveTo(this);
@@ -112,7 +112,7 @@ export default class GameScene extends Phaser.Scene {
     // Launch moveTo action in game. This action sets velocity
     if (!isEqual(nextMoveTo, this.lastMoveTo)) {
       this.lastMoveTo = nextMoveTo;
-      this.store.dispatch(gameSlice.actions.moveTo(nextMoveTo));
+      this.gameStore.dispatch(gameController.actions.moveTo(nextMoveTo));
     }
 
     // Save info into state
@@ -145,7 +145,7 @@ export default class GameScene extends Phaser.Scene {
     star.disableBody(true, true);
 
     // Update the score
-    this.store.dispatch(gameSlice.actions.incrementScore('star'));
+    this.gameStore.dispatch(gameController.actions.incrementScore('star'));
     if (this.stars.countActive(true) === 0) {
       //  A new batch of stars to collect      
       this.stars.children.iterate(child => {
@@ -160,7 +160,7 @@ export default class GameScene extends Phaser.Scene {
   // eslint-disable-next-line no-unused-vars
   hitBomb(player, bomb) {
     // GAME OVER
-    this.store.dispatch(gameSlice.actions.setGameOver(true));
+    this.store.dispatch(gameController.actions.setGameOver(true));
   }
 }
 
@@ -202,7 +202,7 @@ const saveInfo = (that) => {
       y: parseInt(that.player.body.position.y)
     }
   };
-  that.store.dispatch(gameSlice.actions.setInfo(info));
+  that.gameStore.dispatch(gameController.actions.setInfo(info));
 };
 
 const createPlayer = (that) => {
