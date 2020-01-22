@@ -4,6 +4,9 @@ exports[`scenes/game start with default values 1`] = `
 Object {
   "gameController": Object {
     "config": Object {
+      "score": Object {
+        "star": 10,
+      },
       "velocity": 160,
     },
     "gameOver": false,

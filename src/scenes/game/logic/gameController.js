@@ -5,12 +5,10 @@ const gameController = createSlice({
   slice: 'gameController',
   initialState,
   reducers: {
-    setGameOver: (state, action) => {
-      state.gameOver = action.payload && state.inmunity < 1;
-    },
     setInmunity: (state, action) => {
       state.inmunity = action.payload;
     },
+
     moveTo: (state, action) => {
       // mutate the state all you want with immer            
       state.moveTo = action.payload;
@@ -34,11 +32,14 @@ const gameController = createSlice({
       state.inmunity--;
     },
 
-    incrementScore: (state, action) => {
-      const scoreData = {
-        star: 10
-      };
-      state.score = state.score + scoreData[action.payload]; // mutate the state all you want with immer
+    collision: (state, action) => {
+      if (action.payload === 'bomb') {
+        // Game Over
+        state.gameOver = state.inmunity < 1;
+      } else {
+        // Change score
+        state.score = state.score + state.config.score[action.payload]; // mutate the state all you want with immer
+      }
     },
 
     setInfo: (state, action) => {

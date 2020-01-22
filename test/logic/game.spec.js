@@ -61,31 +61,40 @@ describe('scenes/game', () => {
     expect(result.gameController.velocity.y).toBeLessThan(initialState.velocity.y);
   });
 
-  it('action: incrementScore star', async () => {
-    await storeTesting.dispatch(gameController.actions.incrementScore('star'));
+  it('action: collision with star', async () => {
+    await storeTesting.dispatch(gameController.actions.collision('star'));
 
     // Checks
     const result = storeTesting.getState();
     expect(result.gameController.score).toBeGreaterThan(initialState.score);
-  });
-
-  it('action: setGameOver true with inmunity', async () => {
-    await storeTesting.dispatch(gameController.actions.setInmunity(100));
-    await storeTesting.dispatch(gameController.actions.setGameOver(true));
-
-    // Checks
-    const result = storeTesting.getState();
     expect(result.gameController.gameOver).toBe(false);
-  });
+  });  
 
-  it('action: setGameOver true without inmunity', async () => {
-    await storeTesting.dispatch(gameController.actions.setInmunity(0));
-    await storeTesting.dispatch(gameController.actions.setGameOver(true));
+  it('action: collision with bomb. Player has inmunity', async () => {
+    // State before action
+    const preState = await storeTesting.getState();
+    // Player and bomb collision
+    await storeTesting.dispatch(gameController.actions.collision('bomb'));
 
     // Checks
-    const result = storeTesting.getState();
-    expect(result.gameController.gameOver).toBe(true);
+    const result = await storeTesting.getState();
+    expect(result.gameController.score).toBe(preState.gameController.score);
+    expect(result.gameController.gameOver).toBe(false);
   });  
+
+  it('action: collision with bomb. Player has not inmunity', async () => {
+    // Disable inmunity
+    await storeTesting.dispatch(gameController.actions.setInmunity(0));
+    // State before action
+    const preState = await storeTesting.getState();
+    // Player and bomb collision
+    await storeTesting.dispatch(gameController.actions.collision('bomb'));
+
+    // Checks
+    const result = await storeTesting.getState();
+    expect(result.gameController.score).toBe(preState.gameController.score);
+    expect(result.gameController.gameOver).toBe(true);
+  });    
 
   it('action: setinfo', async () => {
     const infoData = {

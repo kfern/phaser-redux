@@ -144,8 +144,10 @@ export default class GameScene extends Phaser.Scene {
   collectStar(player, star) {
     star.disableBody(true, true);
 
-    // Update the score
-    this.gameStore.dispatch(gameController.actions.incrementScore('star'));
+    // Update the game state
+    this.gameStore.dispatch(gameController.actions.collision('star'));
+
+    // Check active stars
     if (this.stars.countActive(true) === 0) {
       //  A new batch of stars to collect      
       this.stars.children.iterate(child => {
@@ -159,8 +161,8 @@ export default class GameScene extends Phaser.Scene {
 
   // eslint-disable-next-line no-unused-vars
   hitBomb(player, bomb) {
-    // GAME OVER
-    this.store.dispatch(gameController.actions.setGameOver(true));
+    // Update the game state
+    this.gameStore.dispatch(gameController.actions.collision('bomb'));
   }
 }
 
@@ -193,7 +195,6 @@ const getNextMoveTo = (that) => {
 
   return next;
 };
-
 
 const saveInfo = (that) => {
   const info = {

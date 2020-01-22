@@ -1,6 +1,9 @@
 const initialState = {
   config: {
-    velocity: 160
+    velocity: 160,
+    score: {
+      star: 10
+    }
   },
   inmunity: 15,
   gameOver: false,
