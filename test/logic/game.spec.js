@@ -66,7 +66,8 @@ describe('scenes/game', () => {
 
     // Checks
     const result = storeTesting.getState();
-    expect(result.gameController.score).toBeGreaterThan(initialState.score);
+    const newScore = initialState.score + result.gameController.config.score.star;
+    expect(result.gameController.score).toBe(newScore);
     expect(result.gameController.gameOver).toBe(false);
   });  
 
@@ -82,7 +83,7 @@ describe('scenes/game', () => {
     expect(result.gameController.gameOver).toBe(false);
   });  
 
-  it('action: collision with bomb. Player has not inmunity', async () => {
+  it('action: collision with bomb. Player has no inmunity', async () => {
     // Disable inmunity
     await storeTesting.dispatch(gameController.actions.setInmunity(0));
     // State before action
