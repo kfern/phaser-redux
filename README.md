@@ -2,11 +2,11 @@
 
 [![HitCount](http://hits.dwyl.io/kfern/phaser-redux.svg)](http://hits.dwyl.io/kfern/phaser-redux)
 
-Este proyecto es un ejemplo de cómo usar redux para desarrollar juegos con Phaser 3, además de pretender ser una herramienta en Español para quienes estén interesados en aprender a programar juegos.
+Este proyecto es un ejemplo de cómo usar redux para desarrollar juegos con Phaser 3, además de pretender ser una herramienta en Español para quienes estén interesados en aprender a programar juegos. En el siguiente enlace tienes ideas sobre [cómo y por qué usar redux con Phaser](docs/redux.md)
 
 Combinar Phaser y Redux permite que el desarrollo de un juego sea más módular, fácil de depurar mediante Redux devTools y abre la posibilidad de automatizar los tests de la lógica del juego. 
 
-![Imagen del juego y Redux devTools](https://github.com/kfern/phaser-redux/blob/master/docs/images/phaser-redux-a.png)
+![Imagen del juego y Redux devTools](docs/images/phaser-redux-a.png)
 
 El ejemplo está basado en el tutorial "Making your first Phaser 3 game" https://phaser.io/tutorials/making-your-first-phaser-3-game, utiliza "Phaser 3 Webpack Project Template" https://github.com/photonstorm/phaser3-project-template, "Redux Starter Kit" https://github.com/reduxjs/redux-starter-kit y "redux-watch" https://github.com/jprichardson/redux-watch
 
@@ -43,9 +43,9 @@ En local se abre una ventana en el navegador. Se puede cerrar sin que afecte a l
 
 Si todo ha ido bien, verás una salida como la siguiente:
 
-![Tests Ok. Coverage 100% ](https://github.com/kfern/phaser-redux/blob/master/docs/images/tests-and-coverage_1.3.2.png)
+![Tests Ok. Coverage 100% ](docs/images/tests-and-coverage.png)
 
-El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/commit/ed0cb84f64e886b0a593cb34a3d4a1e21d9fabd2/checks?check_suite_id=388062128#step:4:100)
+El proyecto está integrado con GitHub Actions, por lo que cualquier cambio es [comprobado previamente de forma automática](https://github.com/kfern/phaser-redux/runs/407719648?check_suite_focus=true#step:4:128)
 
 # Idioma
 El idioma oficial de la documentación y gestión del repositorio es el Español, por lo que no es necesario usar el idioma inglés para abrir o comentar un "Issue" o en los "Pull request" o hacer cualquier pregunta.
@@ -56,6 +56,7 @@ Por otra parte, el idioma para los comentarios en el código fuente es el inglé
 Lista de mejoras que se podrían implementar. Quien esté intesado en colaborar puede enviar un PR o abrir un Issue.
 * ~~Poder jugar con pantalla táctil y ratón.~~ Versión 1.1.0
 * ~~Adaptar el tamaño del juego al de la pantalla.~~ Versión 1.3.0. @gammafp
+* ~~Añadir tests de ejemplo.~~
+* Ampliar la documentación https://github.com/kfern/phaser-redux/issues/10
 * Refactorizar estrellas y bombas para que sean clases independientes.
 * Añadir en el estado todo lo necesario para poder ver con devTools la pantalla completa en cada instante. Ahora sólo se gestionan la puntuación y la animación que se aplica al player.
-* Añadir tests de ejemplo [WIP] https://github.com/kfern/phaser-redux/issues/11

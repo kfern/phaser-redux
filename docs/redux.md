@@ -5,6 +5,7 @@
 - Cuando trabajas sobre un juego dedicas mucho tiempo en la pantalla de un navegador haciendo comprobaciones.
 - Ciertos errores son difíciles de reproducir y después de corregidos pueden aparecer de nuevo.
 - Dos personas diferentes no podemos trabajar sobre la misma escena.
+- Me gustaría añadir en un futuro la posibilidad de que sea multijugador o incorporar una AI.
 
 Si te identificas con alguno de estos puntos, entonces puedes seguir leyendo ;-)
 
@@ -28,10 +29,13 @@ Una escena en Phaser no es sencilla de testar de forma automática. Todo lo que 
 
 - Las acciones en redux son funciones puras en javascript: Con unos datos de entrada determinados siempre se producirá el mismo resultado, por lo que un caso como el anterior es muy fácil de comprobar. Tan sólo hay que preparar el estado inicial, ejecutar la acción y comprobar cómo se ha modificado el estado. Si el estado no es el esperado el test no se habría pasado.
 
+Cuando se usa Redux la forma de organizar el código es bastante similar a la del modelo cliente/servidor, por lo que usarlo simplifica los cambios necesarios para pasar un juego a multijugador o para incorporar nuevas formas de interactuar con el juego. ¿Está preparado tu juego para usarlo mediante gestos o movimientos corporales?
+
 En resumen, usando redux:
 
 - Se puede separar en la escena la lógica de la vista.
 - La lógica se puede testar de forma sencilla y automática.
+- El juego esta preparado para crecer, tanto en número de jugadores como añadiendo interacción mediante visión artificial, dispositivos IoT o lo que aparezca en un futuro.
 - Se duerme con más tranquilidad. ;-)
 
 # Como se usa redux en esta versión del tutorial
@@ -78,26 +82,14 @@ El estado inicial es el siguiente:
 
 # Qué es redux (sin entrar en detalles técnicos)
 
-## Tres principios fundamentales
+## Tres principios fundamentales:
 
-Tal y como se describe en el sitio oficial,
-
-"Redux puede ser descrito en tres principios fundamentales:
-
-[...]
-
-Única fuente de la verdad
-El estado de toda tu aplicación esta almacenado en un árbol guardado en un único store.
-
-[...]
-
-El estado es de solo lectura
-La única forma de modificar el estado es emitiendo una acción, un objeto describiendo que ocurrió.
-
-[...]
-
-Los cambios se realizan con funciones puras
-Para especificar como el árbol de estado es transformado por las acciones, se utilizan reducers puros."
+- Única fuente de la verdad
+    - El estado de toda tu aplicación esta almacenado en un árbol guardado en un único store.
+- El estado es de solo lectura
+    - La única forma de modificar el estado es emitiendo una acción, un objeto describiendo que ocurrió.
+- Los cambios se realizan con funciones puras
+    - Para especificar como el árbol de estado es transformado por las acciones, se utilizan reducers puros."
 
 https://es.redux.js.org/docs/introduccion/tres-principios.html
 
@@ -113,7 +105,7 @@ En redux el estado es un objeto json.
 
 En este objeto se almacena la puntuación (score), si el juego ha terminado (gameOver), etc
 
-El estado inicial de este juego se encuentra en https://github.com/kfern/phaser-redux/blob/refactor-logic/src/scenes/game/logic/initialState.js
+El estado inicial de este juego se encuentra en https://github.com/kfern/phaser-redux/blob/master/src/scenes/game/logic/initialState.js
 
 ### El estado es de solo lectura
 
@@ -135,11 +127,11 @@ Desde la escena se actualiza la puntuación ejecutando la acción "collision" y 
 - gameController.actions.collision => La acción o "reducer" se llama "collision"
 - ('star') => Parámetros que se pasan a la función collision.
 
-[Enlace a la escena donde se ejecuta la acción](https://github.com/kfern/phaser-redux/blob/49683563e9bb31cf930f50302fe1a8b2988ca55e/src/scenes/game/GameScene.js#L147)
+[Enlace a la escena donde se ejecuta la acción](https://github.com/kfern/phaser-redux/blob/master/src/scenes/game/GameScene.js#L147)
 
 La función en la que se actualiza la puntuación se llama "collision" y se define junto con el estado.
 
 ![Reducer collision](images/collisionReducer.png)
 
-[Enlace al reducer en el que se define la acción](https://github.com/kfern/phaser-redux/blob/49683563e9bb31cf930f50302fe1a8b2988ca55e/src/scenes/game/logic/gameController.js#L35)
+[Enlace al reducer en el que se define la acción](https://github.com/kfern/phaser-redux/blob/master/src/scenes/game/logic/gameController.js#L35)
 
