@@ -39,13 +39,16 @@ const getGridBase = (dimensions) => {
   return Promise.resolve(grid);
 };
 
-// eslint-disable-next-line no-alert
 const getImageFrom = async (filePath) => {
   const image = await ImageJs.load(filePath);
   return Promise.resolve(image);
 };
 
-// eslint-disable-next-line no-alert
+const saveImageTo = async (image, filePath) => {
+  await image.save(filePath);
+  return Promise.resolve();
+};
+
 const getImageWithThreshold = async (image, threshold, color) => {
   const newImagen = image.clone();
   const imageGray = newImagen.grey();
@@ -132,6 +135,7 @@ const getItemsFoundInImage = async (imageItem, imageScene) => {
 
 module.exports = {
   getGridBase,
+  saveImageTo,
   getImageFrom,
   getSimilarity,
   findImageInImage,
