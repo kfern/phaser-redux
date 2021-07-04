@@ -1,8 +1,11 @@
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
+const fs = require("fs");
+
 const {
   getGridBase,
+  saveImageTo,
   getImageFrom,
   getSimilarity,
   findImageInImage,
@@ -118,6 +121,30 @@ describe('imageLib', () => {
         failureThresholdType: 'pixel'
       }
       await expect(await image.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
+    });
+
+    it('saveImageTo with valid path', async () => {      
+      // Arrange
+      const filePathRead = './test/utils/images/dude.png';
+      const imageFirst = await getImageFrom(filePathRead);
+      const imageGrey = await imageFirst.grey();
+      const filePathWrite = './test/utils/images/dude-grey.png';
+      if (fs.existsSync(filePathWrite)) {
+        fs.unlinkSync(filePathWrite);
+      }
+
+      // Act
+      await saveImageTo(imageGrey, filePathWrite);
+
+      // Assert
+      const imageLast = await getImageFrom(filePathWrite);
+      const maxDiff = 0;
+      const options = {
+        customSnapshotIdentifier: 'saveImageTo',
+        failureThreshold: maxDiff,
+        failureThresholdType: 'pixel'
+      }
+      await expect(await imageLast.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
     });
 
     it('getImageWithThreshold', async () => {
@@ -287,7 +314,7 @@ describe('imageLib', () => {
         failureThresholdType: 'pixel'
       };
       await expect(await resultImage.toBase64({ type: 'image/png' })).toMatchImageSnapshot(options);
-      
+
     });
   });
 
