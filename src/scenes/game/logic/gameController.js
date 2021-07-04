@@ -1,7 +1,8 @@
-const { createSlice } = require('redux-starter-kit');
+const { createSlice } = require('@reduxjs/toolkit');
 const { initialState } = require('./initialState');
 
 const gameController = createSlice({
+  name: 'testName',
   slice: 'gameController',
   initialState,
   reducers: {
