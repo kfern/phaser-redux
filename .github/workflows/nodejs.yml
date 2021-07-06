@@ -1,7 +1,12 @@
 name: Logic and Visual Tests
 
-on: [push]
-
+on:
+  push:
+    branches: [ master, break-the-game, next ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ master, break-the-game, next ]
+    
 jobs:
   build:
 
